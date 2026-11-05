@@ -1,5 +1,6 @@
 package com.socialquest.app
-
+import com.socialquest.app.ui.components.SocialQuestSplash
+import androidx.compose.runtime.*
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,10 +21,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SocialquestTheme()  {
-                Surface (
-                    modifier = Modifier.fillMaxSize()
-                ) {
+            SocialquestTheme {
+                var showSplash by remember {
+                    mutableStateOf(true)
+                }
+
+                if (showSplash) {
+                    SocialQuestSplash(
+                        onFinished = {
+                            showSplash = false
+                        }
+                    )
+                } else {
                     AppNav()
                 }
             }

@@ -1,5 +1,5 @@
 package com.socialquest.app.ui.screens
-
+import com.socialquest.app.ui.components.GrowthJourney
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +34,9 @@ fun WelcomeScreen(onStart: () -> Unit, onSignIn: () -> Unit) {
             "For adults aged 18 and over. Self-guided practice, not therapy.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        GrowthJourney(
+            modifier = Modifier.padding(vertical = 20.dp)
         )
     }
 }

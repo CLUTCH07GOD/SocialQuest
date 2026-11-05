@@ -1,5 +1,7 @@
 package com.socialquest.app.ui.screens
 
+import com.socialquest.app.ui.components.SocialQuestLoadingScreen
+import com.socialquest.app.ui.components.GrowthJourney
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -190,6 +192,9 @@ private fun NextStepCard(goal: String, onStart: () -> Unit) {
             ) {
                 Text("Start practising", style = MaterialTheme.typography.labelLarge)
             }
+            GrowthJourney(
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
         }
     }
 }

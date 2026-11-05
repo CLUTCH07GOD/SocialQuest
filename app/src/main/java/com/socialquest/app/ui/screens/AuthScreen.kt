@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.socialquest.app.ui.components.Gap
 import com.socialquest.app.ui.components.PrimaryButton
+import com.socialquest.app.ui.components.QuestPrimaryButton
 import com.socialquest.app.ui.components.QuietButton
 import com.socialquest.app.ui.components.ScreenFrame
 
@@ -37,6 +38,7 @@ fun AuthScreen(
     onSubmit: (email: String, nickname: String) -> Unit,
     onSwitch: () -> Unit,
 ) {
+    var isLoading by remember { mutableStateOf(false) }
     var email by rememberSaveable { mutableStateOf("") }
     var nickname by rememberSaveable { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -109,11 +111,33 @@ fun AuthScreen(
         )
         Gap(24)
 
-        PrimaryButton(if (register) "Create account" else "Sign in", {
-            tried = true
-            if (emailOk && passwordOk) onSubmit(email.trim(), nickname.trim())
-        })
-        QuietButton(if (register) "I already have an account" else "I’m new here", onSwitch)
+        QuestPrimaryButton(
+            text = if (register) "Create account" else "Sign in",
+            loading = isLoading,
+            enabled = emailOk && passwordOk && !isLoading,
+            onClick = {
+                tried = true
+
+                if (emailOk && passwordOk) {
+                    isLoading = true
+
+                    onSubmit(
+                        email.trim(),
+                        nickname.trim()
+                    )
+
+                    isLoading = false
+                }
+            }
+        )
+
+        QuietButton(
+            if (register) "I already have an account"
+            else "I'm new here",
+            onSwitch
+        )
+
         Gap(16)
     }
 }
+
