@@ -17,3 +17,7 @@ local.properties
 # Secrets
 .env
 .env.*
+   *.db
+   __pycache__/
+   .pytest_cache/
+   venv/
